@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/home/wiking/Programowanie/VS Apps/cHash/homePage2/App/homePage2.csproj": {}
+    "/home/wiking/Programowanie/VSCode/HomePage2/App/homePage2.csproj": {}
   },
   "projects": {
-    "/home/wiking/Programowanie/VS Apps/cHash/homePage2/App/homePage2.csproj": {
+    "/home/wiking/Programowanie/VSCode/HomePage2/App/homePage2.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/wiking/Programowanie/VS Apps/cHash/homePage2/App/homePage2.csproj",
+        "projectUniqueName": "/home/wiking/Programowanie/VSCode/HomePage2/App/homePage2.csproj",
         "projectName": "homePage2",
-        "projectPath": "/home/wiking/Programowanie/VS Apps/cHash/homePage2/App/homePage2.csproj",
+        "projectPath": "/home/wiking/Programowanie/VSCode/HomePage2/App/homePage2.csproj",
         "packagesPath": "/home/wiking/.nuget/packages/",
-        "outputPath": "/home/wiking/Programowanie/VS Apps/cHash/homePage2/App/obj/",
+        "outputPath": "/home/wiking/Programowanie/VSCode/HomePage2/App/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/wiking/.nuget/NuGet/NuGet.Config"
@@ -55,7 +55,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/6.0.102/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/6.0.200/RuntimeIdentifierGraph.json"
         }
       }
     }

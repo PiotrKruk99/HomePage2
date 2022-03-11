@@ -1,5 +1,5 @@
 {
-  "FilePath": "/home/wiking/Programowanie/VS Apps/cHash/homePage2/App/homePage2.csproj",
+  "FilePath": "/home/wiking/Programowanie/VSCode/HomePage2/App/homePage2.csproj",
   "Configuration": {
     "ConfigurationName": "MVC-3.0",
     "LanguageVersion": "6.0",
@@ -16298,27 +16298,27 @@
   "RootNamespace": "homePage2",
   "Documents": [
     {
-      "FilePath": "/home/wiking/Programowanie/VS Apps/cHash/homePage2/App/Views/Home/Privacy.cshtml",
-      "TargetPath": "Views\\Home\\Privacy.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "/home/wiking/Programowanie/VS Apps/cHash/homePage2/App/Views/_ViewImports.cshtml",
-      "TargetPath": "Views\\_ViewImports.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "/home/wiking/Programowanie/VS Apps/cHash/homePage2/App/Views/_ViewStart.cshtml",
-      "TargetPath": "Views\\_ViewStart.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "/home/wiking/Programowanie/VS Apps/cHash/homePage2/App/Views/Shared/_Layout.cshtml",
+      "FilePath": "/home/wiking/Programowanie/VSCode/HomePage2/App/Views/Shared/_Layout.cshtml",
       "TargetPath": "Views\\Shared\\_Layout.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "/home/wiking/Programowanie/VS Apps/cHash/homePage2/App/Views/Home/Index.cshtml",
+      "FilePath": "/home/wiking/Programowanie/VSCode/HomePage2/App/Views/_ViewStart.cshtml",
+      "TargetPath": "Views\\_ViewStart.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "/home/wiking/Programowanie/VSCode/HomePage2/App/Views/_ViewImports.cshtml",
+      "TargetPath": "Views\\_ViewImports.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "/home/wiking/Programowanie/VSCode/HomePage2/App/Views/Home/Privacy.cshtml",
+      "TargetPath": "Views\\Home\\Privacy.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "/home/wiking/Programowanie/VSCode/HomePage2/App/Views/Home/Index.cshtml",
       "TargetPath": "Views\\Home\\Index.cshtml",
       "FileKind": "mvc"
     }

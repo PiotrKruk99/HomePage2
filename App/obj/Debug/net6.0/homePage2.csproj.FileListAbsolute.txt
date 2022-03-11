@@ -46,3 +46,27 @@
 /home/wiking/Programowanie/VS Apps/cHash/homePage2/App/obj/Debug/net6.0/ref/homePage2.dll
 /home/wiking/Programowanie/VS Apps/cHash/homePage2/App/obj/Debug/net6.0/homePage2.pdb
 /home/wiking/Programowanie/VS Apps/cHash/homePage2/App/obj/Debug/net6.0/homePage2.genruntimeconfig.cache
+/home/wiking/Programowanie/VSCode/HomePage2/App/bin/Debug/net6.0/appsettings.Development.json
+/home/wiking/Programowanie/VSCode/HomePage2/App/bin/Debug/net6.0/appsettings.json
+/home/wiking/Programowanie/VSCode/HomePage2/App/bin/Debug/net6.0/homePage2.staticwebassets.runtime.json
+/home/wiking/Programowanie/VSCode/HomePage2/App/bin/Debug/net6.0/homePage2
+/home/wiking/Programowanie/VSCode/HomePage2/App/bin/Debug/net6.0/homePage2.deps.json
+/home/wiking/Programowanie/VSCode/HomePage2/App/bin/Debug/net6.0/homePage2.runtimeconfig.json
+/home/wiking/Programowanie/VSCode/HomePage2/App/bin/Debug/net6.0/homePage2.dll
+/home/wiking/Programowanie/VSCode/HomePage2/App/bin/Debug/net6.0/homePage2.pdb
+/home/wiking/Programowanie/VSCode/HomePage2/App/obj/Debug/net6.0/homePage2.csproj.AssemblyReference.cache
+/home/wiking/Programowanie/VSCode/HomePage2/App/obj/Debug/net6.0/homePage2.GeneratedMSBuildEditorConfig.editorconfig
+/home/wiking/Programowanie/VSCode/HomePage2/App/obj/Debug/net6.0/homePage2.AssemblyInfoInputs.cache
+/home/wiking/Programowanie/VSCode/HomePage2/App/obj/Debug/net6.0/homePage2.AssemblyInfo.cs
+/home/wiking/Programowanie/VSCode/HomePage2/App/obj/Debug/net6.0/homePage2.csproj.CoreCompileInputs.cache
+/home/wiking/Programowanie/VSCode/HomePage2/App/obj/Debug/net6.0/homePage2.MvcApplicationPartsAssemblyInfo.cache
+/home/wiking/Programowanie/VSCode/HomePage2/App/obj/Debug/net6.0/homePage2.RazorAssemblyInfo.cache
+/home/wiking/Programowanie/VSCode/HomePage2/App/obj/Debug/net6.0/homePage2.RazorAssemblyInfo.cs
+/home/wiking/Programowanie/VSCode/HomePage2/App/obj/Debug/net6.0/staticwebassets.build.json
+/home/wiking/Programowanie/VSCode/HomePage2/App/obj/Debug/net6.0/staticwebassets.development.json
+/home/wiking/Programowanie/VSCode/HomePage2/App/obj/Debug/net6.0/scopedcss/bundle/homePage2.styles.css
+/home/wiking/Programowanie/VSCode/HomePage2/App/obj/Debug/net6.0/homePage2.dll
+/home/wiking/Programowanie/VSCode/HomePage2/App/obj/Debug/net6.0/refint/homePage2.dll
+/home/wiking/Programowanie/VSCode/HomePage2/App/obj/Debug/net6.0/homePage2.pdb
+/home/wiking/Programowanie/VSCode/HomePage2/App/obj/Debug/net6.0/homePage2.genruntimeconfig.cache
+/home/wiking/Programowanie/VSCode/HomePage2/App/obj/Debug/net6.0/ref/homePage2.dll
