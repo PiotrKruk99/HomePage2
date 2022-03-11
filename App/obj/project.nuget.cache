@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "iXYRqUbQ65e9B1VwrBtWx9Re19ZLmkfg7EYI1+kO6IQ8GEiCxOHt1Fayom0TlXHqNsL915KL2uC4nr4PPXfBYQ==",
+  "dgSpecHash": "ds78F4nREMwHTlFNj3t5rRYJKFWt0IseqaasDcdIVLF8Dy9LH3T/GdZOJTO1+FRK7LCdNfxVJCUH8ME/a3VMiw==",
   "success": true,
-  "projectFilePath": "/home/wiking/Programowanie/VS Apps/cHash/homePage2/homePage2.csproj",
+  "projectFilePath": "/home/wiking/Programowanie/VS Apps/cHash/homePage2/App/homePage2.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

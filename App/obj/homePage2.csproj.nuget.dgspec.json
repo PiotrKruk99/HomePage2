@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/home/wiking/Programowanie/VS Apps/cHash/homePage2/homePage2.csproj": {}
+    "/home/wiking/Programowanie/VS Apps/cHash/homePage2/App/homePage2.csproj": {}
   },
   "projects": {
-    "/home/wiking/Programowanie/VS Apps/cHash/homePage2/homePage2.csproj": {
+    "/home/wiking/Programowanie/VS Apps/cHash/homePage2/App/homePage2.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/wiking/Programowanie/VS Apps/cHash/homePage2/homePage2.csproj",
+        "projectUniqueName": "/home/wiking/Programowanie/VS Apps/cHash/homePage2/App/homePage2.csproj",
         "projectName": "homePage2",
-        "projectPath": "/home/wiking/Programowanie/VS Apps/cHash/homePage2/homePage2.csproj",
+        "projectPath": "/home/wiking/Programowanie/VS Apps/cHash/homePage2/App/homePage2.csproj",
         "packagesPath": "/home/wiking/.nuget/packages/",
-        "outputPath": "/home/wiking/Programowanie/VS Apps/cHash/homePage2/obj/",
+        "outputPath": "/home/wiking/Programowanie/VS Apps/cHash/homePage2/App/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/wiking/.nuget/NuGet/NuGet.Config"
