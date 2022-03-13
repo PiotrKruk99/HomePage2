@@ -18,6 +18,11 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.MapControllerRoute(
+    name: "news",
+    pattern: "News/",
+    defaults: new {controller = "Home", action = "News"});
+
+app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
