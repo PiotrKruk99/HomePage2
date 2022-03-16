@@ -18,6 +18,10 @@ public class HomeController : Controller
 
     public IActionResult Login()
     {
+        var s = JsonOper.Read("email");
+        ViewBag.test = "";
+        if (s != null) ViewBag.test = s;
+
         return View();
     }
 
