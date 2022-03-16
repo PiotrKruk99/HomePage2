@@ -22,6 +22,21 @@ public class HomeController : Controller
         ViewBag.test = "";
         if (s != null) ViewBag.test = s;
 
+        switch (LiteDBOper.CheckAdmin())
+        {
+            case -1:
+                ViewBag.test = "błąd komunikacji z bazą";
+                break;
+            case 0:
+                ViewBag.test = "admin nie istnieje";
+                break;
+            case 1:
+                ViewBag.test = "admin istnieje";
+                break;
+            default:
+                break;
+        }
+
         return View();
     }
 
