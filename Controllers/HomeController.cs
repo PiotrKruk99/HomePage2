@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using homePage2.Models;
+using System.Net.Mail;
 
 namespace homePage2.Controllers;
 
@@ -19,19 +20,22 @@ public class HomeController : Controller
     public IActionResult Login()
     {
         var s = JsonOper.Read("email");
-        ViewBag.test = "";
-        if (s != null) ViewBag.test = s;
+        ViewBag.message = "";
+        //if (s != null) ViewBag.message = s;
 
         switch (LiteDBOper.CheckAdmin())
         {
             case -1:
-                ViewBag.test = "błąd komunikacji z bazą";
+                ViewBag.message = "error connectinng to database";
                 break;
             case 0:
-                ViewBag.test = "admin nie istnieje";
+                MailMessage msg = new MailMessage("biuro@liberezo.pl", "p.kruk@liberezo.pl", "test", "to jest test wysyłki maila");
+                SmtpClient smtp = new SmtpClient("smtp.webio.pl", 465);
+                smtp.Send(msg);
+                ViewBag.message = "registration email was post";
                 break;
             case 1:
-                ViewBag.test = "admin istnieje";
+                ViewBag.message = "admin istnieje";
                 break;
             default:
                 break;
