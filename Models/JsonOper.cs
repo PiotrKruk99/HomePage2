@@ -5,25 +5,41 @@ namespace homePage2.Models;
 public static class JsonOper
 {
     private const string jsonPath = @"AppData/appData.json";
-    public static string? Read(string property)
+
+    private class Field
+    {
+        public string email { get; set; } = "";
+    }
+
+    public static string? Read()
     {
         if (!File.Exists(jsonPath))
         {
             return null;
         }
-
-        Utf8JsonReader reader = new Utf8JsonReader(File.ReadAllBytes(jsonPath));
-
-        while (reader.Read())
+        try
         {
-            if (reader.TokenType == JsonTokenType.PropertyName
-            && reader.GetString() != null && reader.GetString() == property
-            && reader.Read() && reader.TokenType == JsonTokenType.String)
-            {
-                return reader.GetString();
-            }
+            var field = JsonSerializer.Deserialize<Field>(File.ReadAllText(jsonPath));
+            return field == null ? null : field.email;
+
+        }
+        catch (Exception)
+        {
+            return null;
         }
 
-        return null;
+        // Utf8JsonReader reader = new Utf8JsonReader(File.ReadAllBytes(jsonPath));
+
+        // while (reader.Read())
+        // {
+        //     if (reader.TokenType == JsonTokenType.PropertyName
+        //     && reader.GetString() != null && reader.GetString() == property
+        //     && reader.Read() && reader.TokenType == JsonTokenType.String)
+        //     {
+        //         return reader.GetString();
+        //     }
+        // }
+
+        // return null;
     }
 }
