@@ -17,9 +17,9 @@ public class HomeController : Controller
         return View();
     }
 
-    public async Task<IActionResult> Login()
+    public IActionResult Login()
     {
-        var s = JsonOper.Read();
+        var s = JsonOper.ReadEmail();
         ViewBag.message = "";
         if (s != null) ViewBag.message = s;
 
@@ -29,13 +29,7 @@ public class HomeController : Controller
                 ViewBag.message = "error connectinng to database";
                 break;
             case 0:
-                var email = await Email
-                        .From("bill.gates@microsoft.com")
-                        .To("p.kruk@liberezo.pl", "P Kruk")
-                        .Subject("test")
-                        .Body("to jest test wysyłki")
-                        .SendAsync();
-                ViewBag.message = "registration email was post";
+                ViewBag.message = "registration email was send";
                 break;
             case 1:
                 ViewBag.message = "admin istnieje";

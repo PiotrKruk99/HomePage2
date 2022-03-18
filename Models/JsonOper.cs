@@ -8,10 +8,11 @@ public static class JsonOper
 
     private class Field
     {
-        public string email { get; set; } = "";
+        public string? email { get; set; }
     }
 
-    public static string? Read()
+    public static string? ReadEmail()
+    /*get email to send admin account link*/
     {
         if (!File.Exists(jsonPath))
         {
@@ -21,7 +22,6 @@ public static class JsonOper
         {
             var field = JsonSerializer.Deserialize<Field>(File.ReadAllText(jsonPath));
             return field == null ? null : field.email;
-
         }
         catch (Exception)
         {

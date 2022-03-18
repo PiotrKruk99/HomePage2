@@ -56,4 +56,16 @@ public static class LiteDBOper
 
         return -1;
     }
+
+    public static bool AddAdmin()
+    {
+        var ldb = OpenLDB();
+
+        if (ldb == null) return false;
+
+        
+
+        ldb.Dispose();
+        return false;
+    }
 }
