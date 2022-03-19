@@ -9,6 +9,10 @@ public static class JsonOper
     private class Field
     {
         public string? email { get; set; }
+        public string? mailHost {get; set;}
+        public int? mailPort {get;set;}
+        public string? mailLogin {get; set;}
+        public string? mailPassword {get; set;}
     }
 
     public static string? ReadEmail()
