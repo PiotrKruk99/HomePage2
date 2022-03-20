@@ -29,6 +29,7 @@ public class HomeController : Controller
                 ViewBag.message = "error connectinng to database";
                 break;
             case 0:
+                FluentOper.SendRegistrationEmail();
                 ViewBag.message = "registration email was send";
                 break;
             case 1:

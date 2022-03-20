@@ -6,13 +6,13 @@ public static class JsonOper
 {
     private const string jsonPath = @"AppData/appData.json";
 
-    private class Field
+    public class Field
     {
         public string? email { get; set; }
-        public string? mailHost {get; set;}
-        public int? mailPort {get;set;}
-        public string? mailLogin {get; set;}
-        public string? mailPassword {get; set;}
+        public string? mailHost { get; set; }
+        public int? mailPort { get; set; }
+        public string? mailLogin { get; set; }
+        public string? mailPassword { get; set; }
     }
 
     public static string? ReadEmail()
@@ -22,6 +22,7 @@ public static class JsonOper
         {
             return null;
         }
+
         try
         {
             var field = JsonSerializer.Deserialize<Field>(File.ReadAllText(jsonPath));
@@ -45,5 +46,30 @@ public static class JsonOper
         // }
 
         // return null;
+    }
+
+    public static Field? ReadField()
+    /*get all email data*/
+    {
+        if (!File.Exists(jsonPath))
+        {
+            return null;
+        }
+
+        try
+        {
+            var field = JsonSerializer.Deserialize<Field>(File.ReadAllText(jsonPath));
+
+            if (field == null || field.email == null || field.mailHost == null 
+                || field.mailPort == null || field.mailLogin == null 
+                || field.mailPassword == null)
+                return null;
+            else
+                return field;
+        }
+        catch (Exception)
+        {
+            return null;
+        }
     }
 }
