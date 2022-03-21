@@ -1,7 +1,6 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using homePage2.Models;
-using FluentEmail.Core;
 
 namespace homePage2.Controllers;
 
