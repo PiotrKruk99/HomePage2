@@ -5,32 +5,55 @@ namespace homePage2.Models;
 
 public static class MailKitOper
 {
-    public static ResultMsg SendRegistrationEmail()
+    private static ResultMsg SendEmail(MimeMessage email)
     {
-        JsonOper.Field? field = JsonOper.ReadField();
-        if (field == null) return new ResultMsg(false, "cannot get mail data", ResultMsg.ResultType.danger);
+        JsonOper.Fields? fields = JsonOper.ReadFile();
+        if (fields == null) return new ResultMsg(false, "cannot get mail data", ResultMsg.ResultType.danger);
 
-        var email = new MimeMessage();
-        email.To.Add(MailboxAddress.Parse(field.email));
-        email.From.Add(MailboxAddress.Parse(field.mailLogin));
-        email.Subject = "test";
-        email.Body = new TextPart(MimeKit.Text.TextFormat.Plain) { Text = "to jest test wysyłki wiadomości przez bibliotekę MailKit" };
+        email.To.Add(MailboxAddress.Parse(fields.email));
+        email.From.Add(MailboxAddress.Parse(fields.mailLogin));
 
         var smtp = new SmtpClient();
 
         try
         {
-            smtp.Connect(field.mailHost, field.mailPort ?? 0, MailKit.Security.SecureSocketOptions.Auto);
-            smtp.Authenticate(field.mailLogin, field.mailPassword);
+            smtp.Connect(fields.mailHost, fields.mailPort ?? 0, MailKit.Security.SecureSocketOptions.SslOnConnect);
+            smtp.Authenticate(fields.mailLogin, fields.mailPassword);
             smtp.Timeout = 3000;
             smtp.Send(email);
         }
-        catch (Exception) { return new ResultMsg(false, "cannot connect to smtp", ResultMsg.ResultType.danger); }
+        catch (Exception)
+        {
+            return new ResultMsg(false, "cannot send registration email", ResultMsg.ResultType.danger);
+        }
         finally
         {
             smtp.Disconnect(true);
         }
 
-        return new ResultMsg(true, "mail send", ResultMsg.ResultType.success);
+        return new ResultMsg(true, "registration email send", ResultMsg.ResultType.success);
+    }
+
+    public static ResultMsg SendRegistrationEmail()
+    {
+        var email = new MimeMessage();
+        email.Subject = "registration mail from HomePage";
+
+        string body = @"<h3>Witamy w rejestracji do HomePage</h3>";
+        body += @"<p>
+                    Aby przejść do okna tworzenia hasła nowego konta administracyjnego kliknij
+                    poniższy link lub przekopiuj go do paska adresu przeglądarki.
+                </p>";
+        body += @"<a href=""http://www.liberezo.pl"" target=""_blank"">link rejestracyjny</a>";
+        body += @"<p>
+                    W razie problemów z rejestracją prosimy o kontakt z Liberezo.
+                </p>";
+
+        email.Body = new TextPart(MimeKit.Text.TextFormat.Html)
+        {
+            Text = body
+        };
+
+        return SendEmail(email);
     }
 }

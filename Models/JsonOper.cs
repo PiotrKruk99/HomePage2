@@ -6,7 +6,7 @@ public static class JsonOper
 {
     private const string jsonPath = @"AppData/appData.json";
 
-    public class Field
+    public class Fields
     {
         public string? email { get; set; }
         public string? mailHost { get; set; }
@@ -25,30 +25,16 @@ public static class JsonOper
 
         try
         {
-            var field = JsonSerializer.Deserialize<Field>(File.ReadAllText(jsonPath));
+            var field = JsonSerializer.Deserialize<Fields>(File.ReadAllText(jsonPath));
             return field == null ? null : field.email;
         }
         catch (Exception)
         {
             return null;
         }
-
-        // Utf8JsonReader reader = new Utf8JsonReader(File.ReadAllBytes(jsonPath));
-
-        // while (reader.Read())
-        // {
-        //     if (reader.TokenType == JsonTokenType.PropertyName
-        //     && reader.GetString() != null && reader.GetString() == property
-        //     && reader.Read() && reader.TokenType == JsonTokenType.String)
-        //     {
-        //         return reader.GetString();
-        //     }
-        // }
-
-        // return null;
     }
 
-    public static Field? ReadField()
+    public static Fields? ReadFile()
     /*get all email data*/
     {
         if (!File.Exists(jsonPath))
@@ -58,10 +44,10 @@ public static class JsonOper
 
         try
         {
-            var field = JsonSerializer.Deserialize<Field>(File.ReadAllText(jsonPath));
+            var field = JsonSerializer.Deserialize<Fields>(File.ReadAllText(jsonPath));
 
-            if (field == null || field.email == null || field.mailHost == null 
-                || field.mailPort == null || field.mailLogin == null 
+            if (field == null || field.email == null || field.mailHost == null
+                || field.mailPort == null || field.mailLogin == null
                 || field.mailPassword == null)
                 return null;
             else
