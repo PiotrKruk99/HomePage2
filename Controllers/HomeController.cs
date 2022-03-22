@@ -28,10 +28,7 @@ public class HomeController : Controller
                 ViewBag.message = "error connectinng to database";
                 break;
             case 0:
-                if(MailKitOper.SendRegistrationEmail())
-                    ViewBag.message = "registration email was send";
-                else
-                    ViewBag.message = "error with registration email sending";
+                ViewBag.message = BootstrapOper.BootstrapAlert(MailKitOper.SendRegistrationEmail());
                 break;
             case 1:
                 ViewBag.message = "admin istnieje";

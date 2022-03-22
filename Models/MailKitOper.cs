@@ -1,4 +1,3 @@
-//using MailKit;
 using MailKit.Net.Smtp;
 using MimeKit;
 
@@ -6,10 +5,10 @@ namespace homePage2.Models;
 
 public static class MailKitOper
 {
-    public static bool SendRegistrationEmail()
+    public static ResultMsg SendRegistrationEmail()
     {
         JsonOper.Field? field = JsonOper.ReadField();
-        if (field == null) return false;
+        if (field == null) return new ResultMsg(false, "cannot get mail data", ResultMsg.ResultType.danger);
 
         var email = new MimeMessage();
         email.To.Add(MailboxAddress.Parse(field.email));
@@ -26,12 +25,12 @@ public static class MailKitOper
             smtp.Timeout = 3000;
             smtp.Send(email);
         }
-        catch (Exception) { return false; }
+        catch (Exception) { return new ResultMsg(false, "cannot connect to smtp", ResultMsg.ResultType.danger); }
         finally
         {
             smtp.Disconnect(true);
         }
 
-        return true;
+        return new ResultMsg(true, "mail send", ResultMsg.ResultType.success);
     }
 }
