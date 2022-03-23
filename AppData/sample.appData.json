@@ -1,3 +1,7 @@
 {
-  "email": "someone@somewhere.pl"
+  "email": "someone@somewhere.pl",
+  "mailHost": "smtp.somehost.pl",
+  "mailPort": 465,
+  "mailLogin": "somelogin@somewhere.pl",
+  "mailPassword": "Password"
 }

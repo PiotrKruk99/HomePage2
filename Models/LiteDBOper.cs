@@ -57,15 +57,19 @@ public static class LiteDBOper
         return -1;
     }
 
-    public static bool AddAdmin()
+    public static ResultMsg AddAdmin()
     {
         var ldb = OpenLDB();
 
-        if (ldb == null) return false;
+        if (ldb == null) return new ResultMsg(false, "database error", ResultMsg.ResultType.danger);
 
-        
+        var randomString = Path.GetRandomFileName().Replace(".", "");
+        randomString += Path.GetRandomFileName().Replace(".", "");
+
+        var coll = ldb.GetCollection<User>(collNames["users"]);
+        coll.Insert(new User() {Name = "admin", authString=randomString});
 
         ldb.Dispose();
-        return false;
+        return new ResultMsg(true, randomString, ResultMsg.ResultType.success);
     }
 }

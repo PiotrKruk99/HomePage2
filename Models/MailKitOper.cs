@@ -36,6 +36,13 @@ public static class MailKitOper
 
     public static ResultMsg SendRegistrationEmail()
     {
+        var addToBaseResult = LiteDBOper.AddAdmin();
+
+        if (!addToBaseResult.Result)
+        {
+            return addToBaseResult;
+        }
+
         var email = new MimeMessage();
         email.Subject = "registration mail from HomePage";
 
@@ -44,7 +51,10 @@ public static class MailKitOper
                     Aby przejść do okna tworzenia hasła nowego konta administracyjnego kliknij
                     poniższy link lub przekopiuj go do paska adresu przeglądarki.
                 </p>";
-        body += @"<a href=""http://www.liberezo.pl"" target=""_blank"">link rejestracyjny</a>";
+        body += @"<a href=""https://localhost:7118/Login?id=";
+        body += addToBaseResult.MsgText;
+        body += @""" target=""_blank"">https://localhost:7118/Login?id=";
+        body += addToBaseResult.MsgText + @"</a>";
         body += @"<p>
                     W razie problemów z rejestracją prosimy o kontakt z Liberezo.
                 </p>";

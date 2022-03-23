@@ -25,7 +25,7 @@ public class HomeController : Controller
         switch (LiteDBOper.CheckAdmin())
         {
             case -1:
-                ViewBag.message = "error connectinng to database";
+                ViewBag.message = "error connecting to database";
                 break;
             case 0:
                 ViewBag.message = BootstrapOper.BootstrapAlert(MailKitOper.SendRegistrationEmail());
