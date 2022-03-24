@@ -46,7 +46,8 @@ public static class MailKitOper
         var email = new MimeMessage();
         email.Subject = "registration mail from HomePage";
 
-        string body = @"<h3>Witamy w rejestracji do HomePage</h3>";
+        string body = @"<div style=""background-color: white; color: black; padding: 5px;"">";
+        body += @"<h3>Witamy w rejestracji do HomePage</h3>";
         body += @"<p>
                     Aby przejść do okna tworzenia hasła nowego konta administracyjnego kliknij
                     poniższy link lub przekopiuj go do paska adresu przeglądarki.
@@ -57,7 +58,7 @@ public static class MailKitOper
         body += addToBaseResult.MsgText + @"</a>";
         body += @"<p>
                     W razie problemów z rejestracją prosimy o kontakt z Liberezo.
-                </p>";
+                </p></div>";
 
         email.Body = new TextPart(MimeKit.Text.TextFormat.Html)
         {

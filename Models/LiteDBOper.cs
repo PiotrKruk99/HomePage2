@@ -41,9 +41,17 @@ public static class LiteDBOper
         if (ldb != null)
         {
             var coll = ldb.GetCollection<User>(collNames["users"]);
+            var elem = coll.FindOne(x => x.Name.Equals("admin"));
 
-            if (coll.Exists(x => x.Name.Equals("admin")))
+            if (elem != null)
             {
+                if (elem.ExpireDate < DateTime.Now)
+                {
+                    coll.Delete(elem.Id);
+                    ldb.Dispose();
+                    return 0;
+                }
+
                 ldb.Dispose();
                 return 1;
             }
@@ -67,7 +75,7 @@ public static class LiteDBOper
         randomString += Path.GetRandomFileName().Replace(".", "");
 
         var coll = ldb.GetCollection<User>(collNames["users"]);
-        coll.Insert(new User() {Name = "admin", authString=randomString});
+        coll.Insert(new User() {Name = "admin", AuthString=randomString});
 
         ldb.Dispose();
         return new ResultMsg(true, randomString, ResultMsg.ResultType.success);
