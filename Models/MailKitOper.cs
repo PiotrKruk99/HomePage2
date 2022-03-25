@@ -52,7 +52,7 @@ public static class MailKitOper
                     Aby przejść do okna tworzenia hasła nowego konta administracyjnego kliknij
                     poniższy link lub przekopiuj go do paska adresu przeglądarki.
                 </p>";
-        body += @"<a href=""https://localhost:7118/Login?id=";
+        body += @"<a href=""https://localhost:7118/Login?authString=";
         body += addToBaseResult.MsgText;
         body += @""" target=""_blank"">https://localhost:7118/Login?id=";
         body += addToBaseResult.MsgText + @"</a>";

@@ -16,11 +16,12 @@ public class HomeController : Controller
         return View();
     }
 
-    public IActionResult Login()
+    [HttpGet]
+    public IActionResult Login(string authString = "")
     {
-        var s = JsonOper.ReadEmail();
-        ViewBag.message = "";
-        if (s != null) ViewBag.message = s;
+        // var s = JsonOper.ReadEmail();
+        // ViewBag.message = "";
+        // if (s != null) ViewBag.message = s;
 
         switch (LiteDBOper.CheckAdmin())
         {
@@ -36,6 +37,7 @@ public class HomeController : Controller
             default:
                 break;
         }
+        //ViewBag.message = authString + "|" + authString.Length;
 
         return View();
     }

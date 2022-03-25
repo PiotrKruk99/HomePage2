@@ -16,7 +16,7 @@ public static class JsonOper
     }
 
     public static string? ReadEmail()
-    /*get email to send admin account link*/
+    /*get email for send admin account link*/
     {
         if (!File.Exists(jsonPath))
         {
