@@ -5,8 +5,9 @@ namespace homePage2.Models;
 public static class LiteDBOper
 {
     private const string liteDBPath = @"AppData/appData.ldb";
-    private static Dictionary<string, string> collNames =
-        new Dictionary<string, string>() { { "users", "users" } };
+    // private static Dictionary<string, string> collNames =
+    //     new Dictionary<string, string>() { { "users", "users" } };
+    private static (string users, string) collNames = (users: "users", "");
 
     private static LiteDatabase? OpenLDB()
     {
@@ -40,7 +41,7 @@ public static class LiteDBOper
 
         if (ldb != null)
         {
-            var cols = ldb.GetCollection<User>(collNames["users"]);
+            var cols = ldb.GetCollection<User>(collNames.users);//"users"]);
             var col = cols.FindOne(x => x.Name.Equals("admin"));
 
             if (col != null)
@@ -74,7 +75,7 @@ public static class LiteDBOper
         var randomString = Path.GetRandomFileName().Replace(".", "");
         randomString += Path.GetRandomFileName().Replace(".", "");
 
-        var cols = ldb.GetCollection<User>(collNames["users"]);
+        var cols = ldb.GetCollection<User>(collNames.users);
         cols.Insert(new User() {Name = "admin", AuthString=randomString});
 
         ldb.Dispose();

@@ -3,7 +3,10 @@
 }
 
 @Html.Raw(@ViewBag.message)
-<form action="/Login" method="post">
+
+@if (ViewBag.emailCompared)
+{
+    <form action="/Login" method="post">
     <div class="container text-center">
         <div class="row">
             <div class="col-4 text-end">
@@ -27,4 +30,10 @@
                 <button type="submit">Zaloguj</button>
             </div>
         </div>
+    </div>
 </form>
+}
+else
+{
+    <p>lalalalala</p>
+}
