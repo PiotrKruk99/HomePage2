@@ -6,6 +6,13 @@ namespace homePage2.Controllers;
 
 public class HomeController : Controller
 {
+    private IConfiguration _config;
+
+    public HomeController(IConfiguration config)
+    {
+        _config = config;
+    }
+
     public IActionResult Index()
     {
         return View();
@@ -41,6 +48,7 @@ public class HomeController : Controller
                 break;
         }
         //ViewBag.message = authString + "|" + authString.Length;
+        ViewBag.message = (new AppSettingsOper(_config)).GetHostPath();
 
         return View();
     }
