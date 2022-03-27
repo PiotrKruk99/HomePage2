@@ -8,7 +8,7 @@ public static class MailKitOper
     private static ResultMsg SendEmail(MimeMessage email)
     {
         JsonOper.Fields? fields = JsonOper.ReadFile();
-        if (fields == null) return new ResultMsg(false, "cannot get mail data", ResultMsg.ResultType.danger);
+        if (fields == null) return new ResultMsg(false, 0, "cannot get mail data", ResultMsg.ResultType.danger);
 
         email.To.Add(MailboxAddress.Parse(fields.email));
         email.From.Add(MailboxAddress.Parse(fields.mailLogin));
@@ -24,17 +24,17 @@ public static class MailKitOper
         }
         catch (Exception)
         {
-            return new ResultMsg(false, "cannot send registration email", ResultMsg.ResultType.danger);
+            return new ResultMsg(false, 0, "cannot send registration email", ResultMsg.ResultType.danger);
         }
         finally
         {
             smtp.Disconnect(true);
         }
 
-        return new ResultMsg(true, "registration email send", ResultMsg.ResultType.success);
+        return new ResultMsg(true, 0, "registration email send", ResultMsg.ResultType.success);
     }
 
-    public static ResultMsg SendRegistrationEmail()
+    public static ResultMsg SendRegistrationEmail(IConfiguration config)
     {
         var addToBaseResult = LiteDBOper.AddAdmin();
 
@@ -52,9 +52,9 @@ public static class MailKitOper
                     Aby przejść do okna tworzenia hasła nowego konta administracyjnego kliknij
                     poniższy link lub przekopiuj go do paska adresu przeglądarki.
                 </p>";
-        body += @"<a href=""https://localhost:7118/Login?authString=";
+        body += @"<a href=""" + AppSettingsOper.GetHostPath(config) + @"Login?authString=";
         body += addToBaseResult.MsgText;
-        body += @""" target=""_blank"">https://localhost:7118/Login?id=";
+        body += @""" target=""_blank"">" + AppSettingsOper.GetHostPath(config) + @"Login?id=";
         body += addToBaseResult.MsgText + @"</a>";
         body += @"<p>
                     W razie problemów z rejestracją prosimy o kontakt z Liberezo.

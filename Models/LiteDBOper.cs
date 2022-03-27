@@ -66,11 +66,23 @@ public static class LiteDBOper
         return -1;
     }
 
+    public static ResultMsg CheckAdminsAuthString(string authString)
+    {
+        var ldb = OpenLDB();
+
+        if (ldb != null)
+        {
+
+        }
+
+        return new ResultMsg(false, 0, "error connecting database", ResultMsg.ResultType.info);
+    }
+
     public static ResultMsg AddAdmin()
     {
         var ldb = OpenLDB();
 
-        if (ldb == null) return new ResultMsg(false, "database error", ResultMsg.ResultType.danger);
+        if (ldb == null) return new ResultMsg(false, 0, "database error", ResultMsg.ResultType.danger);
 
         var randomString = Path.GetRandomFileName().Replace(".", "");
         randomString += Path.GetRandomFileName().Replace(".", "");
@@ -79,6 +91,6 @@ public static class LiteDBOper
         cols.Insert(new User() {Name = "admin", AuthString=randomString});
 
         ldb.Dispose();
-        return new ResultMsg(true, randomString, ResultMsg.ResultType.success);
+        return new ResultMsg(true, 0, randomString, ResultMsg.ResultType.success);
     }
 }

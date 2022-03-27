@@ -1,16 +1,9 @@
 namespace homePage2.Models;
 
-public class AppSettingsOper
+public static class AppSettingsOper
 {
-    private IConfiguration _config;
-
-    public AppSettingsOper(IConfiguration config)
+    public static string GetHostPath(IConfiguration config)
     {
-        _config = config;
-    }
-
-    public string GetHostPath()
-    {
-        return _config.GetValue<string>("HostPath");
+        return config.GetValue<string>("HostPath");
     }
 }

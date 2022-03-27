@@ -35,11 +35,11 @@ public class HomeController : Controller
         switch (LiteDBOper.CheckAdmin())
         {
             case -1:
-                ViewBag.message = BootstrapOper.BootstrapAlert(new ResultMsg(false, "error connecting to database", ResultMsg.ResultType.danger));
+                ViewBag.message = BootstrapOper.BootstrapAlert(new ResultMsg(false, 0, "error connecting to database", ResultMsg.ResultType.danger));
                 break;
             case 0:
                 ViewBag.emailCompared = false;
-                ViewBag.message = BootstrapOper.BootstrapAlert(MailKitOper.SendRegistrationEmail());
+                ViewBag.message = BootstrapOper.BootstrapAlert(MailKitOper.SendRegistrationEmail(_config));
                 break;
             case 1:
                 ViewBag.message = "admin istnieje";
@@ -48,7 +48,7 @@ public class HomeController : Controller
                 break;
         }
         //ViewBag.message = authString + "|" + authString.Length;
-        ViewBag.message = (new AppSettingsOper(_config)).GetHostPath();
+        //ViewBag.message = (new AppSettingsOper(_config)).GetHostPath();
 
         return View();
     }
