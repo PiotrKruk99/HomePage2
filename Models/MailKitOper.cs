@@ -8,7 +8,7 @@ public static class MailKitOper
     private static ResultMsg SendEmail(MimeMessage email)
     {
         JsonOper.Fields? fields = JsonOper.ReadFile();
-        if (fields == null) return new ResultMsg(false, 0, "cannot get mail data", ResultMsg.ResultType.danger);
+        if (fields == null) return new ResultMsg(false, "cannot get mail data", ResultMsg.ResultType.danger);
 
         email.To.Add(MailboxAddress.Parse(fields.email));
         email.From.Add(MailboxAddress.Parse(fields.mailLogin));
@@ -24,14 +24,14 @@ public static class MailKitOper
         }
         catch (Exception)
         {
-            return new ResultMsg(false, 0, "cannot send registration email", ResultMsg.ResultType.danger);
+            return new ResultMsg(false, "cannot send registration email", ResultMsg.ResultType.danger);
         }
         finally
         {
             smtp.Disconnect(true);
         }
 
-        return new ResultMsg(true, 0, "registration email send", ResultMsg.ResultType.success);
+        return new ResultMsg(true, "registration email send", ResultMsg.ResultType.success);
     }
 
     public static ResultMsg SendRegistrationEmail(IConfiguration config)

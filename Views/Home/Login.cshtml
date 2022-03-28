@@ -4,7 +4,7 @@
 
 @Html.Raw(@ViewBag.message)
 
-@if (ViewBag.emailCompared)
+@if (ViewBag.emailConfirmed)
 {
     <form action="/Login" method="post">
     <div class="container text-center">
@@ -35,5 +35,5 @@
 }
 else
 {
-    <p>lalalalala</p>
+    <p>Oczekiwanie na aktywację konta.</p>
 }

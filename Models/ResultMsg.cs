@@ -13,7 +13,7 @@ public class ResultMsg
     public string MsgText { get { return _msgText; } set { _msgText = value; } }
     public ResultType MsgType { get { return _msgType; } set { _msgType = value; } }
     public int ErrCode { get { return _errCode; } set { _errCode = value; } }
-    public ResultMsg(bool result, int errCode = 0, string message = "", ResultType type = ResultType.info)
+    public ResultMsg(bool result, string message = "", ResultType type = ResultType.info, int errCode = 0)
     {
         _result = result;
         _errCode = errCode;

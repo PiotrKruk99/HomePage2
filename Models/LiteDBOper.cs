@@ -33,7 +33,7 @@ public static class LiteDBOper
         return ldb;
     }
 
-    public static int CheckAdmin()
+    public static ResultMsg CheckAdmin()
     /*returns 1 on admin exists, 0 on admin not exists 
     and -1 on error on communication with database*/
     {
@@ -50,20 +50,20 @@ public static class LiteDBOper
                 {
                     cols.Delete(col.Id);
                     ldb.Dispose();
-                    return 0;
+                    return new ResultMsg(false, "admin not exists", ResultMsg.ResultType.warning, 0);
                 }
 
                 ldb.Dispose();
-                return 1;
+                return new ResultMsg(true, "admin exists", ResultMsg.ResultType.info, 1);
             }
             else
             {
                 ldb.Dispose();
-                return 0;
+                return new ResultMsg(false, "admin not exists", ResultMsg.ResultType.warning, 0);
             }
         }
 
-        return -1;
+        return new ResultMsg(false, "error connecting to database", ResultMsg.ResultType.danger, -1);
     }
 
     public static ResultMsg CheckAdminsAuthString(string authString)
@@ -72,25 +72,43 @@ public static class LiteDBOper
 
         if (ldb != null)
         {
+            var col = ldb.GetCollection<User>(collNames.users).FindOne(x => x.Name.Equals("admin"));
 
+            if (col == null)
+            {
+                return new ResultMsg(false, "no admin entry", ResultMsg.ResultType.warning);
+            }
+
+            if (col.AuthString.Equals(authString))
+            {
+                ldb.Dispose();
+                return new ResultMsg(true, "authorization string correct", ResultMsg.ResultType.success);
+            }
+            else
+            {
+                ldb.Dispose();
+                return new ResultMsg(false, "authorization string not correct", ResultMsg.ResultType.warning);
+            }
         }
-
-        return new ResultMsg(false, 0, "error connecting database", ResultMsg.ResultType.info);
+        else
+        {
+            return new ResultMsg(false, "error connecting database", ResultMsg.ResultType.info);
+        }
     }
 
     public static ResultMsg AddAdmin()
     {
         var ldb = OpenLDB();
 
-        if (ldb == null) return new ResultMsg(false, 0, "database error", ResultMsg.ResultType.danger);
+        if (ldb == null) return new ResultMsg(false, "database error", ResultMsg.ResultType.danger);
 
         var randomString = Path.GetRandomFileName().Replace(".", "");
         randomString += Path.GetRandomFileName().Replace(".", "");
 
         var cols = ldb.GetCollection<User>(collNames.users);
-        cols.Insert(new User() {Name = "admin", AuthString=randomString});
+        cols.Insert(new User() { Name = "admin", AuthString = randomString });
 
         ldb.Dispose();
-        return new ResultMsg(true, 0, randomString, ResultMsg.ResultType.success);
+        return new ResultMsg(true, randomString, ResultMsg.ResultType.success);
     }
 }

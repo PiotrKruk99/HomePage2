@@ -30,19 +30,26 @@ public class HomeController : Controller
         // ViewBag.message = "";
         // if (s != null) ViewBag.message = s;
 
-        ViewBag.emailCompared = true;
+        ViewBag.emailConfirmed = false;
+        var isAdmin = LiteDBOper.CheckAdmin();
 
-        switch (LiteDBOper.CheckAdmin())
+        switch (isAdmin.ErrCode)
         {
-            case -1:
-                ViewBag.message = BootstrapOper.BootstrapAlert(new ResultMsg(false, 0, "error connecting to database", ResultMsg.ResultType.danger));
+            case -1: //database error
+                ViewBag.message = BootstrapOper.BootstrapAlert(isAdmin);
                 break;
-            case 0:
-                ViewBag.emailCompared = false;
+            case 0: //admin not present in database or admin entry expired
                 ViewBag.message = BootstrapOper.BootstrapAlert(MailKitOper.SendRegistrationEmail(_config));
                 break;
-            case 1:
-                ViewBag.message = "admin istnieje";
+            case 1: //admin present in database
+                if (LiteDBOper.CheckAdminsAuthString(authString).Result)
+                {
+
+                }
+                else
+                {
+                    ViewBag.message = BootstrapOper.BootstrapAlert(new ResultMsg(false, "wrong authorization key", ResultMsg.ResultType.warning));
+                }                
                 break;
             default:
                 break;
