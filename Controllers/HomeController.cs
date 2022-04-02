@@ -68,7 +68,7 @@ public class HomeController : Controller
     [HttpPost]
     public IActionResult Login()
     {
-        return View("/Login");
+        return Redirect("Login");
     }
 
     public IActionResult Privacy()
