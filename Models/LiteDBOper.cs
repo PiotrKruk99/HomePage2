@@ -87,12 +87,12 @@ public static class LiteDBOper
             else
             {
                 ldb.Dispose();
-                return new ResultMsg(false, "authorization string not correct", ResultMsg.ResultType.warning);
+                return new ResultMsg(false, "authorization string incorrect", ResultMsg.ResultType.warning);
             }
         }
         else
         {
-            return new ResultMsg(false, "error connecting database", ResultMsg.ResultType.info);
+            return new ResultMsg(false, "error connecting database", ResultMsg.ResultType.danger);
         }
     }
 

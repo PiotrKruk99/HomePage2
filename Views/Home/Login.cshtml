@@ -4,7 +4,7 @@
 
 @Html.Raw(@ViewBag.message)
 
-@if (ViewBag.emailConfirmed)
+@if (ViewBag.emailConfirmed ?? false)
 {
     <form action="/Login" method="post">
     <div class="container text-center">
@@ -36,4 +36,33 @@
 else
 {
     <p>Oczekiwanie na aktywację konta.</p>
+    @if (ViewBag.authInit ?? false)
+    {
+        <form action="/Login" method="post" id="setPassword" name="setPassword">
+    <div class="container text-center">
+        <div class="row">
+            <div class="col-4 text-end">
+                <label>Hasło:</label>
+            </div>
+            <div class="col-8 text-start">
+                <input type="password" id="password1" name="password1">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4 text-end">
+                <label>Powtórz hasło:</label>
+            </div>
+            <div class="col-8 text-start">
+                <input type="password" id="password2" name="password2">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4"></div>
+            <div class="col-8 text-start">
+                <button type="submit">Potwierdź</button>
+            </div>
+        </div>
+    </div>
+</form>
+    }
 }
