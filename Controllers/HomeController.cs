@@ -18,11 +18,13 @@ public class HomeController : Controller
         return View();
     }
 
+    [Route("/News")]
     public IActionResult News()
     {
         return View();
     }
 
+    [Route("/Login")]
     [HttpGet]
     public IActionResult Login(string authString = "")
     {
@@ -65,9 +67,26 @@ public class HomeController : Controller
         return View();
     }
 
+    [Route("/SetPass")]
     [HttpPost]
-    public IActionResult Login()
+    public IActionResult SetPass()
     {
+        // var keys = Request.Form.Keys;
+        // string btn = Request.Form["formId"];
+        // ViewBag.message = "jestem tutaj";
+        // return View("Login");
+        string pass1 = Request.Form["password1"];
+        string pass2 = Request.Form["password2"];
+
+        if (pass1.Equals(pass2))
+        {
+        }
+        else
+        {
+            ViewBag.message = BootstrapOper.Alert(new ResultMsg(false, "Passwords are not the same.", ResultMsg.ResultType.warning));
+            return View("Login");
+        }
+
         return Redirect("Login");
     }
 
