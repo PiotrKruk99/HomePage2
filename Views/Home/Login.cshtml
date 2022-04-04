@@ -3,6 +3,7 @@
 }
 
 @Html.Raw(@ViewBag.message)
+@Html.Raw(@TempData["message"])
 
 @if (ViewBag.emailConfirmed ?? false)
 {
@@ -59,7 +60,7 @@ else
         <div class="row">
             <div class="col-4"></div>
             <div class="col-8 text-start">
-                <button type="submit">Potwierdź</button>
+                <button type="submit" value="@ViewBag.requestPath" name="sendBtn">Potwierdź</button>
             </div>
         </div>
     </div>

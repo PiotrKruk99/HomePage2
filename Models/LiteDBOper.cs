@@ -53,8 +53,16 @@ public static class LiteDBOper
                     return new ResultMsg(false, "admin not exists", ResultMsg.ResultType.warning, 0);
                 }
 
-                ldb.Dispose();
-                return new ResultMsg(true, "admin exists", ResultMsg.ResultType.info, 1);
+                if (col.Password.Equals(string.Empty))
+                {
+                    ldb.Dispose();
+                    return new ResultMsg(true, "admin exists", ResultMsg.ResultType.info, 1);
+                }
+                else
+                {
+                    ldb.Dispose();
+                    return new ResultMsg(true, "password exists", ResultMsg.ResultType.info, 2);
+                }
             }
             else
             {
@@ -110,5 +118,25 @@ public static class LiteDBOper
 
         ldb.Dispose();
         return new ResultMsg(true, randomString, ResultMsg.ResultType.success);
+    }
+
+    public static ResultMsg SetAdminPassword(string pass)
+    {
+        var ldb = OpenLDB();
+        if (ldb == null) return new ResultMsg(false, "database error", ResultMsg.ResultType.danger);
+
+        var cols = ldb.GetCollection<User>(collNames.users);
+        var col = cols.FindOne(x => x.Name.Equals("admin"));
+
+        if (col != null)
+        {
+            col.Password = pass;
+            cols.Update(col);
+            ldb.Dispose();
+            return new ResultMsg(true);
+        }
+
+        ldb.Dispose();
+        return new ResultMsg(false, "error connecting to database", ResultMsg.ResultType.warning);
     }
 }

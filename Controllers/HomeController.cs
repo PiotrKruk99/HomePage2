@@ -28,11 +28,6 @@ public class HomeController : Controller
     [HttpGet]
     public IActionResult Login(string authString = "")
     {
-        // var s = JsonOper.ReadEmail();
-        // ViewBag.message = "";
-        // if (s != null) ViewBag.message = s;
-
-        //ViewBag.emailConfirmed = false;
         var isAdmin = LiteDBOper.CheckAdmin();
 
         switch (isAdmin.ErrCode)
@@ -51,6 +46,7 @@ public class HomeController : Controller
                 if (adminAuthResult.Result)
                 {
                     ViewBag.authInit = true;
+                    ViewBag.requestPath = Request.Path + Request.QueryString;
                 }
                 else
                 {
@@ -58,11 +54,13 @@ public class HomeController : Controller
                 }
                 break;
 
+            case 2: //admin's password exists
+                ViewBag.emailConfirmed = true;
+                break;
+
             default:
                 break;
         }
-        //ViewBag.message = authString + "|" + authString.Length;
-        //ViewBag.message = (new AppSettingsOper(_config)).GetHostPath();
 
         return View();
     }
@@ -71,23 +69,20 @@ public class HomeController : Controller
     [HttpPost]
     public IActionResult SetPass()
     {
-        // var keys = Request.Form.Keys;
-        // string btn = Request.Form["formId"];
-        // ViewBag.message = "jestem tutaj";
-        // return View("Login");
         string pass1 = Request.Form["password1"];
         string pass2 = Request.Form["password2"];
+        string requestPath = Request.Form["sendBtn"];
 
-        if (pass1.Equals(pass2))
+        if (pass1.Equals(pass2) && !pass1.Equals(string.Empty))
         {
+            LiteDBOper.SetAdminPassword(pass1);
+            return Redirect("/Login");
         }
         else
         {
-            ViewBag.message = BootstrapOper.Alert(new ResultMsg(false, "Passwords are not the same.", ResultMsg.ResultType.warning));
-            return View("Login");
+            TempData["message"] = BootstrapOper.Alert(new ResultMsg(false, "passwords are empty or not the same", ResultMsg.ResultType.warning));
+            return Redirect(requestPath);
         }
-
-        return Redirect("Login");
     }
 
     public IActionResult Privacy()
