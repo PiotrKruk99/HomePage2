@@ -5,8 +5,6 @@ namespace homePage2.Models;
 public static class LiteDBOper
 {
     private const string liteDBPath = @"AppData/appData.ldb";
-    // private static Dictionary<string, string> collNames =
-    //     new Dictionary<string, string>() { { "users", "users" } };
     private static (string users, string) collNames = (users: "users", "");
 
     private static LiteDatabase? OpenLDB()
@@ -53,7 +51,7 @@ public static class LiteDBOper
                     return new ResultMsg(false, "admin not exists", ResultMsg.ResultType.warning, 0);
                 }
 
-                if (col.Password.Equals(string.Empty))
+                if ((col.Password ?? "").Equals(string.Empty))
                 {
                     ldb.Dispose();
                     return new ResultMsg(true, "admin exists", ResultMsg.ResultType.info, 1);
@@ -75,6 +73,7 @@ public static class LiteDBOper
     }
 
     public static ResultMsg CheckAdminsAuthString(string authString)
+    /*checks if authorization string is correct or not*/
     {
         var ldb = OpenLDB();
 
@@ -105,6 +104,7 @@ public static class LiteDBOper
     }
 
     public static ResultMsg AddAdmin()
+    /*adds new admin's account with random authorization string*/
     {
         var ldb = OpenLDB();
 
@@ -121,6 +121,7 @@ public static class LiteDBOper
     }
 
     public static ResultMsg SetAdminPassword(string pass)
+    /*set admins password*/
     {
         var ldb = OpenLDB();
         if (ldb == null) return new ResultMsg(false, "database error", ResultMsg.ResultType.danger);
@@ -138,5 +139,10 @@ public static class LiteDBOper
 
         ldb.Dispose();
         return new ResultMsg(false, "error connecting to database", ResultMsg.ResultType.warning);
+    }
+
+    public static ResultMsg CheckUsersAuth(string login)
+    {
+
     }
 }
