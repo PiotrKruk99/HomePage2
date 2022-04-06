@@ -31,7 +31,7 @@ public static class LiteDBOper
         return ldb;
     }
 
-    public static ResultMsg CheckAdmin()
+    public static ResultMsg CheckAdminExist()
     /*returns 1 on admin exists, 0 on admin not exists 
     and -1 on error on communication with database*/
     {
@@ -141,8 +141,25 @@ public static class LiteDBOper
         return new ResultMsg(false, "error connecting to database", ResultMsg.ResultType.warning);
     }
 
-    public static ResultMsg CheckUsersAuth(string login)
+    public static ResultMsg CheckUsersAuthentication(string login, string password)
+    /*chcking user login and password*/
     {
+        var ldb = OpenLDB();
+        if (ldb == null) return new ResultMsg(false, "database error", ResultMsg.ResultType.danger);
 
+        var cols = ldb.GetCollection<User>(collNames.users);
+        var col = cols.FindOne(x => x.Name.Equals(login));
+
+        if (col != null)
+        {
+            if (col.Password.Equals(password))
+            {
+                ldb.Dispose();
+                return new ResultMsg(true, "correct user name and password", ResultMsg.ResultType.success);
+            }
+        }
+
+        ldb.Dispose();
+        return new ResultMsg(false, "wrong user name or password", ResultMsg.ResultType.warning);
     }
 }

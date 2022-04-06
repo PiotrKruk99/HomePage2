@@ -28,7 +28,7 @@ public class HomeController : Controller
     [HttpGet]
     public IActionResult Login(string authString = "")
     {
-        var isAdmin = LiteDBOper.CheckAdmin();
+        var isAdmin = LiteDBOper.CheckAdminExist();
 
         switch (isAdmin.ErrCode)
         {
@@ -83,6 +83,30 @@ public class HomeController : Controller
             TempData["message"] = BootstrapOper.Alert(new ResultMsg(false, "passwords are empty or not the same", ResultMsg.ResultType.warning));
             return Redirect(requestPath);
         }
+    }
+
+    [Route("/CheckAuthentication")]
+    [HttpPost]
+    public IActionResult CheckAuthentication()
+    {
+        string login = Request.Form["login"];
+        string password = Request.Form["password"];
+
+        if (login == string.Empty || password == string.Empty)
+        {
+            TempData["message"] = BootstrapOper.Alert(new ResultMsg(false, "login and passwords couldn't be empty", ResultMsg.ResultType.warning));
+            return Redirect("/Login");
+        }
+
+        var checkAuthentication = LiteDBOper.CheckUsersAuthentication(login, password);
+        if (!checkAuthentication.Result)
+        {
+            TempData["message"] = BootstrapOper.Alert(checkAuthentication);
+            return Redirect("/Login");
+        }
+
+        TempData["message"] = BootstrapOper.Alert(new ResultMsg(true, "dane logowania poprawne", ResultMsg.ResultType.success));
+        return Redirect("/Login");
     }
 
     public IActionResult Privacy()

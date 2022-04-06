@@ -7,14 +7,14 @@
 
 @if (ViewBag.emailConfirmed ?? false)
 {
-    <form action="/Login" method="post">
+    <form action="/CheckAuthentication" method="post">
     <div class="container text-center">
         <div class="row">
             <div class="col-4 text-end">
                 <label>Login:</label>
             </div>
             <div class="col-8 text-start">
-                <input type="text">
+                <input type="text" id="login" name="login">
             </div>
         </div>
         <div class="row">
@@ -22,7 +22,7 @@
                 <label>Hasło:</label>
             </div>
             <div class="col-8 text-start">
-                <input type="password">
+                <input type="password" id="password" name="password">
             </div>
         </div>
         <div class="row">
@@ -36,7 +36,6 @@
 }
 else
 {
-    <p>Oczekiwanie na aktywację konta.</p>
     @if (ViewBag.authInit ?? false)
     {
         <form action="/SetPass" method="post">
