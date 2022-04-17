@@ -12,7 +12,7 @@ public class HomeController : Controller
 {
     private IConfiguration _config;
 
-    private (string admin, string) roles = (admin: "admin", "");
+    private static (string admin, string) roles = (admin: "admin", "");
 
     public HomeController(IConfiguration config)
     {
@@ -30,10 +30,20 @@ public class HomeController : Controller
         return View();
     }
 
+    [Route("/NewsEdit")]
+    [Authorize(Roles = "admin")]
+    public IActionResult NewsEdit()
+    {
+        return View();
+    }
+
     [Route("/Login")]
     [HttpGet]
     public IActionResult Login(string authString = "")
     {
+        if (HttpContext.User.Identity == null ? false : HttpContext.User.Identity.IsAuthenticated)
+            return Redirect("/NewsEdit");
+
         var isAdmin = LiteDBOper.CheckAdminExist();
 
         switch (isAdmin.ErrCode)
@@ -114,18 +124,15 @@ public class HomeController : Controller
         var claims = new List<Claim>();
         claims.Add(new Claim(ClaimTypes.Name, login));
         claims.Add(new Claim("login", login));
-
-        if ((login).Equals("aaa"))
-            claims.Add(new Claim(ClaimTypes.Role, roles.admin));
-
+        claims.Add(new Claim(ClaimTypes.Role, roles.admin));
         var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
         var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
         await HttpContext.SignInAsync(claimsPrincipal);
 
-        // TempData["message"] = BootstrapOper.Alert(new ResultMsg(true, "dane logowania poprawne", ResultMsg.ResultType.success));
-        // return Redirect("/Login");
+        return Redirect("/NewsEdit");
     }
 
+    [Route("/Logout")]
     [Authorize]
     public async Task<IActionResult> Logout()
     {
