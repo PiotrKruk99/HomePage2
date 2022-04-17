@@ -1,8 +1,27 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddAuthentication()
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(options =>
+                {
+                    options.LoginPath = "/Login";
+                    options.LogoutPath = "/Logout";
+                    //options.AccessDeniedPath = "/Illegal";
+                    options.ExpireTimeSpan = TimeSpan.FromHours(2);
+                    options.Cookie.MaxAge = options.ExpireTimeSpan;
+                    options.SlidingExpiration = true;
+                    options.Events = new CookieAuthenticationEvents()
+                    {
+                        OnCheckSlidingExpiration = async context =>
+                        {
+                            var expireSpan = context.ShouldRenew ? options.ExpireTimeSpan : context.RemainingTime;
+                            await Task.Run(() => context.Response.Cookies.Append("expireSpan", expireSpan.TotalSeconds.ToString()));
+                        }
+                    };
+                });
 
 var app = builder.Build();
 
@@ -17,6 +36,9 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",

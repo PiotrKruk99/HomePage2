@@ -1,12 +1,18 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using homePage2.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using System.Security.Claims;
 
 namespace homePage2.Controllers;
 
 public class HomeController : Controller
 {
     private IConfiguration _config;
+
+    private (string admin, string) roles = (admin: "admin", "");
 
     public HomeController(IConfiguration config)
     {
@@ -67,7 +73,7 @@ public class HomeController : Controller
 
     [Route("/SetPass")]
     [HttpPost]
-    public IActionResult SetPass()
+    public IActionResult SetPassword()
     {
         string pass1 = Request.Form["password1"];
         string pass2 = Request.Form["password2"];
@@ -87,7 +93,7 @@ public class HomeController : Controller
 
     [Route("/CheckAuthentication")]
     [HttpPost]
-    public IActionResult CheckAuthentication()
+    public async Task<IActionResult> CheckAuthentication()
     {
         string login = Request.Form["login"];
         string password = Request.Form["password"];
@@ -105,8 +111,26 @@ public class HomeController : Controller
             return Redirect("/Login");
         }
 
-        TempData["message"] = BootstrapOper.Alert(new ResultMsg(true, "dane logowania poprawne", ResultMsg.ResultType.success));
-        return Redirect("/Login");
+        var claims = new List<Claim>();
+        claims.Add(new Claim(ClaimTypes.Name, login));
+        claims.Add(new Claim("login", login));
+
+        if ((login).Equals("aaa"))
+            claims.Add(new Claim(ClaimTypes.Role, roles.admin));
+
+        var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+        var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
+        await HttpContext.SignInAsync(claimsPrincipal);
+
+        // TempData["message"] = BootstrapOper.Alert(new ResultMsg(true, "dane logowania poprawne", ResultMsg.ResultType.success));
+        // return Redirect("/Login");
+    }
+
+    [Authorize]
+    public async Task<IActionResult> Logout()
+    {
+        await HttpContext.SignOutAsync();
+        return Redirect("/");
     }
 
     public IActionResult Privacy()

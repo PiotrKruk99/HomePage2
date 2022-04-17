@@ -7,7 +7,7 @@
 
 @if (ViewBag.emailConfirmed ?? false)
 {
-    <form action="/CheckAuthentication" method="post">
+    <form asp-controller="Home" asp-action="CheckAuthentication" method="post">
     <div class="container text-center">
         <div class="row">
             <div class="col-4 text-end">
@@ -38,7 +38,7 @@ else
 {
     @if (ViewBag.authInit ?? false)
     {
-        <form action="/SetPass" method="post">
+        <form asp-controller="Home" asp-action="SetPassword" method="post">
     <div class="container text-center">
         <div class="row">
             <div class="col-4 text-end">
@@ -50,7 +50,7 @@ else
         </div>
         <div class="row">
             <div class="col-4 text-end">
-                <label>Poooowtórz&nbsphaaaasło:</label>
+                <label>Powtórz&nbsphasło:</label>
             </div>
             <div class="col-8 text-start">
                 <input type="password" id="password2" name="password2">
