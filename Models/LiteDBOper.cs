@@ -39,20 +39,20 @@ public static class LiteDBOper
 
         if (ldb != null)
         {
-            var cols = ldb.GetCollection<User>(collNames.users);//"users"]);
+            var cols = ldb.GetCollection<User>(collNames.users);
             var col = cols.FindOne(x => x.Name.Equals("admin"));
 
             if (col != null)
             {
-                if (col.ExpireDate < DateTime.Now)
-                {
-                    cols.Delete(col.Id);
-                    ldb.Dispose();
-                    return new ResultMsg(false, "admin not exists", ResultMsg.ResultType.warning, 0);
-                }
-
                 if ((col.Password ?? "").Equals(string.Empty))
                 {
+                    if (col.ExpireDate < DateTime.Now)
+                    {
+                        cols.Delete(col.Id);
+                        ldb.Dispose();
+                        return new ResultMsg(false, "admin not exists", ResultMsg.ResultType.warning, 0);
+                    }
+
                     ldb.Dispose();
                     return new ResultMsg(true, "admin exists", ResultMsg.ResultType.info, 1);
                 }
