@@ -142,7 +142,7 @@ public static class LiteDBOper
     }
 
     public static ResultMsg CheckUsersAuthentication(string login, string password)
-    /*chcking user login and password*/
+    /*checking user login and password*/
     {
         var ldb = OpenLDB();
         if (ldb == null) return new ResultMsg(false, "database error", ResultMsg.ResultType.danger);
