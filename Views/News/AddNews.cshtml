@@ -2,4 +2,32 @@
     ViewData["Title"] = "Dodawanie wiadomości";
 }
 
+@Html.Raw(@ViewBag.message)
+
 <h2>dodawanie wiadomości</h2>
+<form method="post" asp-controller="News" asp-action="AddNews">
+    <div class="container text-center">
+        <div class="row">
+            <div class="col-md-1 text-start">
+                <label>Tytuł:</label>
+            </div>
+            <div class="col-md-11 text-start">
+                <input type="text" id="title" name="title">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-1 text-start">
+                <label>Treść:</label>
+            </div>
+            <div class="col-md-11 text-start">
+                <textarea id="content" name="content" rows="5" cols="37"></textarea>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-11 text-start">
+                <button type="submit" value="@ViewBag.requestPath" name="sendBtn">Potwierdź</button>
+            </div>
+        </div>
+    </div>
+</form>

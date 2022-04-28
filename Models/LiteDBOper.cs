@@ -5,7 +5,7 @@ namespace homePage2.Models;
 public static class LiteDBOper
 {
     private const string liteDBPath = @"AppData/appData.ldb";
-    private static (string users, string) collNames = (users: "users", "");
+    private static (string users, string news) collNames = (users: "users", "news");
 
     private static LiteDatabase? OpenLDB()
     {
@@ -148,6 +148,27 @@ public static class LiteDBOper
         if (ldb == null) return new ResultMsg(false, "database error", ResultMsg.ResultType.danger);
 
         var cols = ldb.GetCollection<User>(collNames.users);
+        var col = cols.FindOne(x => x.Name.Equals(login));
+
+        if (col != null)
+        {
+            if (col.Password.Equals(password))
+            {
+                ldb.Dispose();
+                return new ResultMsg(true, "correct user name and password", ResultMsg.ResultType.success);
+            }
+        }
+
+        ldb.Dispose();
+        return new ResultMsg(false, "wrong user name or password", ResultMsg.ResultType.warning);
+    }
+
+    public static ResultMsg AddNews(string title, string content)
+    {
+        var ldb = OpenLDB();
+        if (ldb == null) return new ResultMsg(false, "database error", ResultMsg.ResultType.danger);
+
+        var cols = ldb.GetCollection<User>(collNames.news);
         var col = cols.FindOne(x => x.Name.Equals(login));
 
         if (col != null)
