@@ -163,24 +163,15 @@ public static class LiteDBOper
         return new ResultMsg(false, "wrong user name or password", ResultMsg.ResultType.warning);
     }
 
-    public static ResultMsg AddNews(string title, string content)
+    public static ResultMsg AddNews(Article article)
     {
         var ldb = OpenLDB();
         if (ldb == null) return new ResultMsg(false, "database error", ResultMsg.ResultType.danger);
 
-        var cols = ldb.GetCollection<User>(collNames.news);
-        var col = cols.FindOne(x => x.Name.Equals(login));
-
-        if (col != null)
-        {
-            if (col.Password.Equals(password))
-            {
-                ldb.Dispose();
-                return new ResultMsg(true, "correct user name and password", ResultMsg.ResultType.success);
-            }
-        }
+        var cols = ldb.GetCollection<Article>(collNames.news);
+        cols.Insert(article);
 
         ldb.Dispose();
-        return new ResultMsg(false, "wrong user name or password", ResultMsg.ResultType.warning);
+        return new ResultMsg(true);
     }
 }
