@@ -163,7 +163,7 @@ public static class LiteDBOper
         return new ResultMsg(false, "wrong user name or password", ResultMsg.ResultType.warning);
     }
 
-    public static ResultMsg AddNews(Article article)
+    public static ResultMsg AddArticle(Article article)
     {
         var ldb = OpenLDB();
         if (ldb == null) return new ResultMsg(false, "database error", ResultMsg.ResultType.danger);

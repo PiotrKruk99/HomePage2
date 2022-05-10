@@ -16,9 +16,9 @@ public class NewsController : Controller
 
     [HttpGet("/AddArticle")]
     [Authorize(Roles = "admin")]
-    public IActionResult AddArticle()
+    public IActionResult AddArticleGet()
     {
-        return View();
+        return View("AddArticle");
     }
 
     [HttpPost("/AddArticle")]
@@ -33,7 +33,9 @@ public class NewsController : Controller
             ViewBag.message = BootstrapOper.Alert(new ResultMsg(false, "title or content is empty", ResultMsg.ResultType.warning));
             return View("AddArticle");
         }
+
+        LiteDBOper.AddArticle(new Article {Title = title, Content = content});
         
-        return View();
+        return Redirect("/NewsEdit");
     }
 }
