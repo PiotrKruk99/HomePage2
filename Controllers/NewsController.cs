@@ -11,6 +11,7 @@ public class NewsController : Controller
     [Authorize(Roles = "admin")]
     public IActionResult NewsEdit()
     {
+        ViewBag.news = LiteDBOper.GetAllArticles();
         return View();
     }
 
