@@ -1,6 +1,6 @@
 @{
     ViewData["Title"] = "Dodawanie i edycja wiadomości";
-    ViewBag.news = ViewBag.news ?? new List<Article>();
+    //ViewBag.news = ViewBag.news ?? new List<Article>();
 }
 
 <h2>edycja wiadomości</h2>
@@ -10,6 +10,6 @@
 {
     <p>
         <b>@item.Title</b><br>
-        @item.Content
+        @Html.Raw(@item.Content)
     </p>
 }
