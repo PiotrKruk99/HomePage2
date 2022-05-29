@@ -176,12 +176,13 @@ public static class LiteDBOper
         return new ResultMsg(true);
     }
 
-    public static IEnumerable<Article>? GetAllArticles()
+    public static List<Article> GetAllArticles()
+    /*get all articles from database*/
     {
         var ldb = OpenLDB();
         if (ldb == null) return null;
 
-        var cols = ldb.GetCollection<Article>(collNames.news).FindAll();
+        List<Article> cols = (List<Article>)ldb.GetCollection<Article>(collNames.news).FindAll();
 
         ldb.Dispose();
         return cols;
