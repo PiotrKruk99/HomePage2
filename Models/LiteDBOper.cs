@@ -1,4 +1,5 @@
 using LiteDB;
+using System.Text.RegularExpressions;
 
 namespace homePage2.Models;
 
@@ -29,6 +30,49 @@ public static class LiteDBOper
         }
 
         return ldb;
+    }
+
+    /// <summary>
+    /// Removes html tags from list of articles.
+    /// </summary>
+    /// <param name="newsList"> List of articles for tags removing.</param>
+    /// <returns>List of articles without html tags.</returns>
+    private static List<Article> RemoveTags(List<Article> newsList)
+    /*removes html tags from articles*/
+    {
+        for (var i = 0; i < newsList.Count; i++)
+        {
+            newsList[i].Title = Regex.Replace(newsList[i].Title, "<.*?>", string.Empty);
+            newsList[i].Content = Regex.Replace(newsList[i].Content, "<.*?>", string.Empty);
+        }
+
+        return newsList;
+    }
+
+    /// <summary>
+    /// Removes html tags from one article.
+    /// </summary>
+    /// <param name="article">Article for tags removing.</param>
+    /// <returns>Article without html tags.</returns>
+    private static Article RemoveTags(Article article)
+    /*removes html tags from one article*/
+    {
+
+        article.Title = Regex.Replace(article.Title, "<.*?>", string.Empty);
+        article.Content = Regex.Replace(article.Content, "<.*?>", string.Empty);
+
+        return article;
+    }
+
+    private static List<Article> AddTags(List<Article> newsList)
+    /*adds formating to articles*/
+    {
+        for (var i = 0; i < newsList.Count; i++)
+        {
+            newsList[i].Content = newsList[i].Content.Replace(Environment.NewLine, "<br>");
+        }
+
+        return newsList;
     }
 
     public static ResultMsg CheckAdminExist()
@@ -170,6 +214,7 @@ public static class LiteDBOper
         if (ldb == null) return new ResultMsg(false, "database error", ResultMsg.ResultType.danger);
 
         var cols = ldb.GetCollection<Article>(collNames.news);
+        article = RemoveTags(article);
         cols.Insert(article);
 
         ldb.Dispose();
@@ -180,9 +225,11 @@ public static class LiteDBOper
     /*get all articles from database*/
     {
         var ldb = OpenLDB();
-        if (ldb == null) return null;
+        if (ldb == null) return new List<Article>();
 
-        List<Article> cols = (List<Article>)ldb.GetCollection<Article>(collNames.news).FindAll();
+        List<Article> cols = new List<Article>(ldb.GetCollection<Article>(collNames.news).FindAll());
+        cols = RemoveTags(cols);
+        cols = AddTags(cols);
 
         ldb.Dispose();
         return cols;
