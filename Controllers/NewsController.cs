@@ -16,14 +16,21 @@ public class NewsController : Controller
         return View();
     }
 
-    [HttpGet("/AddArticle")]
+    [Authorize(Roles = "admin")]
+    public IActionResult DeleteArticle()
+    {
+        int deleteId = Convert.ToInt32(Request.Form["deleteId"]);
+        LiteDBOper.DeleteArticle(deleteId);
+
+        return Redirect("/NewsEdit");
+    }
+
     [Authorize(Roles = "admin")]
     public IActionResult AddArticleGet()
     {
         return View("AddArticle");
     }
 
-    [HttpPost("/AddArticle")]
     [Authorize(Roles = "admin")]
     public IActionResult AddArticlePost()
     {

@@ -221,6 +221,19 @@ public static class LiteDBOper
         return new ResultMsg(true);
     }
 
+    public static ResultMsg DeleteArticle(int id)
+    /*deletes single article by Id*/
+    {
+        var ldb = OpenLDB();
+        if (ldb == null) return new ResultMsg(false, "database error", ResultMsg.ResultType.danger);
+
+        var cols = ldb.GetCollection<Article>(collNames.news);
+        cols.Delete(id);
+
+        ldb.Dispose();
+        return new ResultMsg(true);
+    }
+
     public static List<Article> GetAllArticles()
     /*get all articles from database*/
     {
