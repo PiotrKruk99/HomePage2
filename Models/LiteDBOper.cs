@@ -247,4 +247,16 @@ public static class LiteDBOper
         ldb.Dispose();
         return cols;
     }
+
+    public static Article? GetArticle(int id)
+    /*get one article by it's id*/
+    {
+        var ldb = OpenLDB();
+        if (ldb == null) return null;
+
+        Article col = ldb.GetCollection<Article>(collNames.news).FindById(id);
+
+        ldb.Dispose();
+        return col;
+    }
 }

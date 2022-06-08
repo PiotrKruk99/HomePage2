@@ -17,12 +17,22 @@ public class NewsController : Controller
     }
 
     [Authorize(Roles = "admin")]
+    [HttpPost]
     public IActionResult DeleteArticle()
     {
         int deleteId = Convert.ToInt32(Request.Form["deleteId"]);
         LiteDBOper.DeleteArticle(deleteId);
 
         return Redirect("/NewsEdit");
+    }
+
+    [Authorize(Roles = "admin")]
+    [HttpPost]
+    public IActionResult EditArticle()
+    {
+        int editId = Convert.ToInt32(Request.Form["editId"]);
+        ViewBag.article = LiteDBOper.GetArticle(editId);
+        return AddArticleGet();
     }
 
     [Authorize(Roles = "admin")]

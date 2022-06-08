@@ -1,5 +1,6 @@
 @{
     ViewData["Title"] = "Dodawanie wiadomości";
+    if (ViewBag.article == null) ViewBag.article = new Article() {Id = -1};
 }
 
 @Html.Raw(@ViewBag.message)
@@ -12,7 +13,7 @@
                 <label>Tytuł:</label>
             </div>
             <div class="col-md-11 text-start">
-                <input type="text" id="title" name="title">
+                <input type="text" id="title" name="title" value="@ViewBag.article.Title">
             </div>
         </div>
         <div class="row">
@@ -20,7 +21,7 @@
                 <label>Treść:</label>
             </div>
             <div class="col-md-11 text-start">
-                <textarea id="content" name="content" rows="5" cols="37"></textarea>
+                <textarea id="content" name="content" rows="5" cols="37">@ViewBag.article.Content</textarea>
             </div>
         </div>
         <div class="row">

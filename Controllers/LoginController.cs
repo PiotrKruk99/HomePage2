@@ -63,7 +63,6 @@ public class LoginController : Controller
         return View();
     }
 
-    [Route("/SetPass")]
     [HttpPost]
     public IActionResult SetPassword()
     {
@@ -83,7 +82,6 @@ public class LoginController : Controller
         }
     }
 
-    [Route("/CheckAuthentication")]
     [HttpPost]
     public async Task<IActionResult> CheckAuthentication()
     {
