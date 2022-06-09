@@ -27,7 +27,14 @@
         <div class="row">
             <div class="col-md-1"></div>
             <div class="col-md-11 text-start">
-                <button type="submit">Dodaj</button>
+                @if (ViewBag.article == null)
+                {
+                <button type="submit" name="sendBtn" value="-1">Dodaj</button>
+                }
+                else
+                {
+                <button type="submit" name="sendBtn" value="@ViewBag.article.Id">Edytuj</button>
+                }
             </div>
         </div>
     </div>

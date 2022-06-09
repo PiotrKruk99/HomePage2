@@ -234,6 +234,20 @@ public static class LiteDBOper
         return new ResultMsg(true);
     }
 
+    public static ResultMsg UpdateArticle(Article article)
+    /*updates article in database*/
+    {
+        var ldb = OpenLDB();
+        if (ldb == null) return new ResultMsg(false, "database error", ResultMsg.ResultType.danger);
+
+        var cols = ldb.GetCollection<Article>(collNames.news);
+        article = RemoveTags(article);
+        cols.Update(article);
+
+        ldb.Dispose();
+        return new ResultMsg(true);
+    }
+
     public static List<Article> GetAllArticles()
     /*get all articles from database*/
     {

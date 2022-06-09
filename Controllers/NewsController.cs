@@ -46,14 +46,19 @@ public class NewsController : Controller
     {
         string title = Request.Form["title"];
         string content = Request.Form["content"];
+        int articleId = Convert.ToInt32(Request.Form["sendBtn"]);
 
         if (title.Equals("") || content.Equals(""))
         {
             ViewBag.message = BootstrapOper.Alert(new ResultMsg(false, "title or content is empty", ResultMsg.ResultType.warning));
+            if (articleId >= 0) ViewBag.article = LiteDBOper.GetArticle(articleId);
             return View("AddArticle");
         }
 
-        LiteDBOper.AddArticle(new Article {Title = title, Content = content});
+        if (articleId < 0)
+            LiteDBOper.AddArticle(new Article {Title = title, Content = content});
+        else
+            LiteDBOper.UpdateArticle(new Article {Id = articleId, Title = title, Content = content});
         
         return Redirect("/NewsEdit");
     }

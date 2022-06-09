@@ -5,7 +5,7 @@
 <h2>edycja wiadomości</h2>
 <form><button type="submit" asp-controller="News" asp-action="AddArticleGet">Dodaj...</button></form>
 
-@foreach (var item in ViewBag.news)
+@foreach (Article item in ViewBag.news)
 {
     <p>
         <b>@item.Title</b><br>
