@@ -70,6 +70,13 @@ public static class LiteDBOper
         for (var i = 0; i < newsList.Count; i++)
         {
             newsList[i].Content = newsList[i].Content.Replace(Environment.NewLine, "<br>");
+
+            string pattern = @"(\w|['-_!#^~]|\.)+@(\w|\-)(\w|\.|\-)*(\w|\-)";
+            MatchCollection matches = Regex.Matches(newsList[i].Content, pattern);
+            foreach (Match match in matches)
+            {
+                newsList[i].Content = Regex.Replace(newsList[i].Content, match.Value, "<a href=\"mailto: " + match.Value + "\">" + match.Value + @"</a>");
+            }
         }
 
         return newsList;
