@@ -10,11 +10,9 @@
     <p>
         <b>@item.Title</b><br>
         @Html.Raw(@item.Content)<br>
-        <form method="post" asp-controller="News" asp-action="DeleteArticle">
-            <button type="submit" name="deleteId" value="@item.Id">Usuń...</button>
-        </form>
-        <form method="post" asp-controller="News" asp-action="EditArticle">
-            <button type="submit" name="editId" value="@item.Id">Edytuj...</button>
+        <form method="post" asp-controller="News">
+            <button type="submit" name="deleteId" value="@item.Id" asp-action="DeleteArticle">Usuń...</button>
+            <button type="submit" name="editId" value="@item.Id" asp-action="EditArticle">Edytuj...</button>
         </form>
     </p>
 }

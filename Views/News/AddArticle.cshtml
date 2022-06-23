@@ -27,7 +27,7 @@
         <div class="row">
             <div class="col-md-1"></div>
             <div class="col-md-11 text-start">
-                @if (ViewBag.article == null)
+                @if (ViewBag.article.Id == -1)
                 {
                 <button type="submit" name="sendBtn" value="-1">Dodaj</button>
                 }
@@ -35,6 +35,7 @@
                 {
                 <button type="submit" name="sendBtn" value="@ViewBag.article.Id">Edytuj</button>
                 }
+                <form><button type="submit" asp-controller="News" asp-action="NewsEdit">Anuluj</button></form>
             </div>
         </div>
     </div>

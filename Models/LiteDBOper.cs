@@ -77,6 +77,13 @@ public static class LiteDBOper
             {
                 newsList[i].Content = Regex.Replace(newsList[i].Content, match.Value, "<a href=\"mailto: " + match.Value + "\">" + match.Value + @"</a>");
             }
+
+            pattern = @"https?://(\w|\-)(\w|\.|\-)+(\w|\.|[-=$–_+!*‘(),/])*";
+            matches = Regex.Matches(newsList[i].Content, pattern);
+            foreach (Match match in matches)
+            {
+                newsList[i].Content = Regex.Replace(newsList[i].Content, match.Value, "<a href=\"" + match.Value + "\">" + match.Value + @"</a>");
+            }
         }
 
         return newsList;
