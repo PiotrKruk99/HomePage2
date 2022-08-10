@@ -21,7 +21,7 @@
                 <label>Treść:</label>
             </div>
             <div class="col-md-11 text-start">
-                <textarea id="content" name="content" rows="5" cols="37">@ViewBag.article.Content</textarea>
+                <textarea id="addArticleContent" name="addArticleContent" rows="5" cols="37" oninput="formatText()" onkeyup="formatText()" onchange="formatText()">@ViewBag.article.Content</textarea>
             </div>
         </div>
         <div class="row">

@@ -89,6 +89,21 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false) *@
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.6.0.min.js"></script>
+    <script>
+        {
+            function formatText() {
+                document.getElementById('addArticleContent').innerHTML = 'bleeeeeeeeeeeeeee';
+                $('#addArticleContent').html('bleeee');
+                @* $.ajax({
+                    url: window.location.href + 'GetFormatedText',
+                    dataType: 'text'
+                }).done((data) => {
+                    $("#addArticleContent").html(data);
+                }); *@
+            }
+        }
+    </script>
 </body>
 
 </html>
