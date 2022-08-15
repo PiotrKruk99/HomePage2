@@ -99,19 +99,21 @@
             var counter = setInterval(() => {
                 meter += 1;
 
-                if (meter >= 20 && document.getElementById('addArticleContent').value != '') {
-                    $.ajax({
-                        url: window.location.origin + '/GetFormatedText',
-                        dataType: 'text'
-                    }).done((data) => {
-                        $("#addArticleContent").val(data);
+                if (meter >= 30 && $('#addArticleContent').val() != '') {
+                    //let dataClass = {data: $('#addArticleContent').val()};
+                    $.get(window.location.origin + '/GetFormatedText', {content: $('#addArticleContent').val()}, (data) => {
+                        $("#contentVisualization").html(data);
                     }).fail(() => {
-                        $("#addArticleContent").val(' /host= ' + window.location.host + ' /hostname= ' + window.location.hostname + ' /origin= ' + window.location.origin + ' /pathname= ' + window.location.pathname + ' /port= ' + window.location.port + ' /protocol= ' + window.location.protocol);
+                        //$("#addArticleContent").val(' /host= ' + window.location.host + ' /hostname= ' + window.location.hostname + ' /origin= ' + window.location.origin + ' /pathname= ' + window.location.pathname + ' /port= ' + window.location.port + ' /protocol= ' + window.location.protocol);
                     });
 
                     meter = 0;
                 }
             }, 100);
+        }
+
+        function resetMeter() {
+            meter = 0;
         }
     </script>
 </body>

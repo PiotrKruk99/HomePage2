@@ -21,7 +21,12 @@
                 <label>Treść:</label>
             </div>
             <div class="col-md-11 text-start">
-                <textarea id="addArticleContent" name="addArticleContent" rows="5" cols="37" >@ViewBag.article.Content</textarea>
+                <div>
+                    <div>
+                        <textarea id="addArticleContent" name="addArticleContent" rows="5" cols="37" oninput="resetMeter()" >@ViewBag.article.Content</textarea>
+                    </div>
+                    <div id="contentVisualization"></div>
+                </div>
             </div>
         </div>
         <div class="row">
