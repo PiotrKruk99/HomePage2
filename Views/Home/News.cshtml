@@ -4,5 +4,12 @@
 
 <div class="text-center">
     <h1 class="display-4">Aktualności</h1>
-    <p>Tutaj znajdą się aktualności.</p>
+    @foreach (Article item in ViewBag.news)
+{
+    <p>
+        <hr>
+        <b>@item.Title</b><br>
+        @Html.Raw(@item.Content)<br>
+    </p>
+}
 </div>

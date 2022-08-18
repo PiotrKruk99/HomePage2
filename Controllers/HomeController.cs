@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using homePage2.Models;
 
 namespace homePage2.Controllers;
 
@@ -22,6 +23,8 @@ public class HomeController : Controller
     [Route("/News")]
     public IActionResult News()
     {
+        ViewBag.news = LiteDBOper.GetAllArticles();
+
         return View();
     }
 
